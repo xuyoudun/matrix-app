@@ -1,0 +1,32 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    //”plugin:@typescript-eslint/recommended“
+    "plugin:react/jsx-runtime"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "babelOptions": {
+      "presets": [
+        [
+          "babel-preset-react-app",
+          false
+        ],
+        "babel-preset-react-app/prod"
+      ]
+    },
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "commonjs": true
+  },
+  "rules": {
+    "react/jsx-uses-react": 2,//防止React被错误地标记为未使用
+    "react/prop-types": 0 //防止在React组件定义中丢失props验证
+
+  }
+}
