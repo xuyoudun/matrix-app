@@ -1,8 +1,8 @@
 {
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    //”plugin:@typescript-eslint/recommended“
     "plugin:react/jsx-runtime"
   ],
   "parser": "@typescript-eslint/parser",
@@ -26,7 +26,8 @@
   },
   "rules": {
     "react/jsx-uses-react": 2,//防止React被错误地标记为未使用
-    "react/prop-types": 0 //防止在React组件定义中丢失props验证
-
+    "react/prop-types": 0, //防止在React组件定义中丢失props验证
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "quotes": [2, "single"] //单引号u
   }
 }
