@@ -1,59 +1,31 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {Dropdown, Menu, Tabs} from 'antd';
-import {NvaTabContext, NAV_TAB_DASHBOARD} from './NvaTabProvider';
+import {NAV_TAB_DASHBOARD, NvaTabContext} from './NvaTabProvider';
 import './NvaTab.less'
 import {RenderTabBar} from 'rc-tabs/lib/interface';
+import {ItemType} from 'antd/lib/menu/hooks/useItems';
 
 const TabPane = Tabs.TabPane;
 
 const NvaTab: React.FC<Record<string, never>> = () => {
 
   const {activeKey, removeAll, refresh, remove, removeOthers, changeNvaTab, nvaTabs} = useContext(NvaTabContext)
-  const [contextKey, setContextKey] = useState<string>('');
 
-  const contextMenu = (
-    <Menu>
-      <Menu.Item
-        key="refresh"
-        onClick={(e) => {
-          e.domEvent.stopPropagation()
-          refresh?.()
-        }}
-      >
-        刷新
-      </Menu.Item>
-      {
-        contextKey == NAV_TAB_DASHBOARD.url ? null : (
-          <Menu.Item
-            key="remove"
-            onClick={(e) => {
-              e.domEvent.stopPropagation()
-              remove?.(contextKey)
-            }}
-          >
-            关闭
-          </Menu.Item>)
-      }
-      <Menu.Item
-        key="removeOthers"
-        onClick={(e) => {
-          e.domEvent.stopPropagation();
-          removeOthers?.(contextKey)
-        }}
-      >
-        关闭其他
-      </Menu.Item>
-      <Menu.Item
-        key="removeAll"
-        onClick={(e) => {
-          e.domEvent.stopPropagation();
-          removeAll?.();
-        }}
-      >
-        全部关闭
-      </Menu.Item>
-    </Menu>
-  );
+  const getMenuItems = (contextKey: string): ItemType[] => {
+    return [
+      {label: '刷新', key: 'refresh'},
+      contextKey == NAV_TAB_DASHBOARD.url ? null : {label: '关闭', key: 'remove'},
+      {label: '关闭其他', key: 'removeOthers'},
+      {label: '全部关闭', key: 'removeAll'},
+    ].filter(m => m)
+  }
+
+  const handlerMenuClick = (action: string, contextKey: string) => {
+    if (action == 'refresh') refresh?.();
+    if (action == 'remove') remove?.(contextKey);
+    if (action == 'removeOthers') removeOthers?.(contextKey);
+    if (action == 'removeAll') removeAll?.();
+  }
 
   const renderTabBar: RenderTabBar = (tabNavBarProps, TabNavList) => {
     // https://github.com/react-component/tabs/blob/master/src/TabNavList/TabNode.tsx
@@ -64,16 +36,13 @@ const NvaTab: React.FC<Record<string, never>> = () => {
           (node) => {
             return (
               <Dropdown
-                overlay={contextMenu}
+                destroyPopupOnHide={true}
+                overlay={<Menu items={getMenuItems(`${node.key}`)}
+                               onClick={({key}) => handlerMenuClick(key, `${node.key}`)}/>}
                 placement="bottomLeft"
                 trigger={['contextMenu']}
               >
-                <div onContextMenu={(e) => {
-                  e.preventDefault();
-                  setContextKey(`${node.key}`)
-                }}>
-                  {node}
-                </div>
+                {node}
               </Dropdown>
             );
           }
@@ -81,6 +50,7 @@ const NvaTab: React.FC<Record<string, never>> = () => {
       </TabNavList>
     )
   }
+
   return (
     <Tabs
       activeKey={activeKey}
