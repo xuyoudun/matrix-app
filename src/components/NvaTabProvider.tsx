@@ -1,5 +1,4 @@
 import React, {Context, ReactNode, useEffect, useRef, useState} from 'react';
-import _ from 'lodash';
 import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 
 export interface NvaTab {
@@ -35,15 +34,18 @@ export const NAV_TAB_DASHBOARD: NvaTab = {
   search: '?tname=首页',
 };
 
-//由于location的pathname有时会有/后缀有时没有 这里统一
-const ensureNoSlash = (pathname: string) => {
-  return _.last(pathname) == '/' ? pathname.slice(0, pathname.length - 1) : pathname;
+//规范化pathname
+export const normalizePathname = (pathname: string): string => {
+  return pathname.replace(/\/+$/, '')
+    .replace(/^\/*/, '/')
+    .replace(/\/\/+/g, '/');
 }
+
 
 const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
 
   const {pathname: $pathname, search} = useLocation();
-  const pathname = ensureNoSlash($pathname);
+  const pathname = normalizePathname($pathname);
   const [params] = useSearchParams();
   const navigate = useNavigate();
 
