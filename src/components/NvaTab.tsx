@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Dropdown, Menu, Tabs} from 'antd';
-import {NAV_TAB_DASHBOARD, NvaTabContext} from './NvaTabProvider';
+import {NAV_TAB_DASHBOARD, NvaTabContext} from '../provider/NvaTabProvider';
 import './NvaTab.less'
 import {RenderTabBar} from 'rc-tabs/lib/interface';
 import {ItemType} from 'antd/lib/menu/hooks/useItems';

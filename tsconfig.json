@@ -22,10 +22,10 @@
     "paths": {
       "@utils/*": ["src/utils/*"],
       "@views/*": ["src/views/*"],
-      "@components/*": ["src/public/components/*"],
-      "@hooks/*": ["src/public/hooks/*"],
-      "@images/*": ["src/public/images/*"],
-      "@styles/*": ["src/public/styles/*"],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@images/*": ["public/images/*"],
+      "@styles/*": ["public/styles/*"],
     }
   },
   "include": [
