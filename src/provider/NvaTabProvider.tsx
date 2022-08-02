@@ -35,17 +35,22 @@ export const NAV_TAB_DASHBOARD: NvaTab = {
 };
 
 //规范化pathname
-export const normalizePathname = (pathname: string): string => {
+const normalizePathname = (pathname: string): string => {
   return pathname.replace(/\/+$/, '')
     .replace(/^\/*/, '/')
     .replace(/\/\/+/g, '/');
 }
 
+const normalizeSearch = (search: string | null): string => {
+  search = !search ? '' : search.replace(/^\?*/, '?')
+  return search === '?' ? '' : search
+}
 
 const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
 
-  const {pathname: $pathname, search} = useLocation();
-  const pathname = normalizePathname($pathname);
+  const location = useLocation();
+  const pathname = normalizePathname(location.pathname);
+  const search = normalizeSearch(location.search);
   const [params] = useSearchParams();
   const navigate = useNavigate();
 
@@ -100,7 +105,8 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
     navigate(pathname + search, {replace: true});
   }
 
-  const openNewNvaTab = ({url, title, search}: NvaTab) => {
+  const openNewNvaTab = ({url, title, search = null}: NvaTab) => {
+    url = normalizePathname(url)
     if (url === '/') return;
 
     const nvaTab = nvaTabsRef.current.find((o) => o.url == url);
@@ -108,9 +114,8 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
 
     //确保search中包含tname=xxxx标签名称
     title = title || 'No Title';
-    if (search == null || !decodeURI(search).includes(`tname=${title}`)) {
-      search = search == null ? `?tname=${title}` : `${search}&tname=${title}`;
-    }
+    search = normalizeSearch(search)
+    search = !search ? `?tname=${title}` : (search.match(/tname=\w*/) ? search : `${search}&tname=${title}`)
 
     if (nvaTab == undefined) {
       const start = parseInt(sessionStorage.getItem(STORAGE_NAV_TAB_ACTIVE) || '0') //总是从当前激活的右侧打开新页签
@@ -138,7 +143,7 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  // window.openNewNvaTab = openNewNvaTab;
+  window.openNewNvaTab = openNewNvaTab;
 
   return (
     <NvaTabContext.Provider
