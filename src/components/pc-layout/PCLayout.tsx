@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react';
 import {Layout, Menu} from 'antd';
 import './PCLayout.less';
 import {UploadOutlined, UserOutlined, VideoCameraOutlined} from '@ant-design/icons';
-import NvaTab from './NvaTab';
+import NvaTab from '../nva-tab/NvaTab';
 
 const {Header, Sider, Content} = Layout;
 
@@ -54,7 +54,7 @@ const PCLayout: React.FC<PCLayoutProps> = (props) => {
         <Header>
 
         </Header>
-        <Content style={{margin: '12px', background: '#FFFFFF'}}>
+        <Content className={'page-container'}>
           <NvaTab/>
           {children}
         </Content>

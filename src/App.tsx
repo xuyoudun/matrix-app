@@ -5,12 +5,12 @@ import moment, {Moment} from 'moment';
 import 'moment/locale/zh-cn';
 import {Alert, ConfigProvider, DatePicker, message, Table} from 'antd';
 import 'antd/dist/antd.less';
-import NvaTabProvider from './provider/NvaTabProvider';
+import NvaTabProvider from './components/provider/NvaTabProvider';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import PCLayout from '@components/PCLayout';
+import PCLayout from '@components/pc-layout/PCLayout';
 
 import './App.css';
-import TestFight from './components/TestFight';
+import TestFight from './components/test-fight/TestFight';
 
 moment.locale('zh-cn');
 
