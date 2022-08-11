@@ -18,7 +18,7 @@ export type NvaTabContextProps = {
   refresh?: () => void;
   removeAll?: () => void;
   removeOthers?: (key: string) => void;
-  remove?: (key: string) => void;
+  remove?: (key?: string) => void;
   changeNvaTab?: (key: string) => void;
   openNewNvaTab?: (nvaTab: NvaTab) => void;
 }
@@ -72,7 +72,7 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
     navigate(key + (nvaTab.search || ''));
   }
 
-  const remove = (key: string) => {
+  const remove = (key = pathname) => {
     // dropByCacheKey(key);
     const index = nvaTabsRef.current.findIndex((d) => d.url == key);
     const nvaTabsNext = [...nvaTabsRef.current];
@@ -115,7 +115,7 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
     //确保search中包含tname=xxxx标签名称
     title = title || 'No Title';
     search = normalizeSearch(search)
-    search = !search ? `?tname=${title}` : (search.match(/tname=\w*/) ? search : `${search}&tname=${title}`)
+    search = !search ? `?tname=${title}` : (search.match(/tname=[^&]*/) ? search : `${search}&tname=${title}`)
 
     if (nvaTab == undefined) {
       const start = parseInt(sessionStorage.getItem(STORAGE_NAV_TAB_ACTIVE) || '0') //总是从当前激活的右侧打开新页签

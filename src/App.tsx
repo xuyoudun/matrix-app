@@ -1,45 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 // 由于 antd 组件的默认文案是英文，所以需要修改为中文
 import zhCN from 'antd/es/locale/zh_CN';
-import moment, {Moment} from 'moment';
+import moment from 'moment';
 import 'moment/locale/zh-cn';
-import {Alert, ConfigProvider, DatePicker, message, Table} from 'antd';
+import {ConfigProvider} from 'antd';
 import 'antd/dist/antd.less';
-import NvaTabProvider from './components/provider/NvaTabProvider';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import PCLayout from '@components/pc-layout/PCLayout';
+import {BrowserRouter} from 'react-router-dom';
 
 import './App.css';
-import TestFight from './components/test-fight/TestFight';
+import AppRoutes from './route/routes';
 
 moment.locale('zh-cn');
 
 const App = () => {
-  const [date, setDate] = useState<Moment | null>(moment());
-  const handleChange = (value: Moment | null) => {
-    message.info(`您选择的日期是: ${value ? value.format('YYYY年MM月DD日') : '未选择'}`);
-    setDate(value);
-  };
 
   return (
     <ConfigProvider componentSize="small" locale={zhCN}>
       <BrowserRouter>
-        <NvaTabProvider>
-          <PCLayout>
-            <div style={{width: '80%', margin: '100px auto'}}>
-              <DatePicker onChange={handleChange} value={date}/>
-              <div style={{marginTop: 16}}>
-                <Alert description={date ? date.format('YYYY年MM月DD日') : '未选择'} message="当前日期"/>
-              </div>
-              <Routes>
-                <Route path={'/777'} element={<TestFight message={'777'}/>}></Route>
-                <Route path={'/888'} element={<TestFight message={'888'} type={'error'}/>}></Route>
-                <Route path={'/999'} element={<TestFight message={'999'}/>}></Route>
-              </Routes>
-              <Table/>
-            </div>
-          </PCLayout>
-        </NvaTabProvider>
+        <AppRoutes/>
       </BrowserRouter>
     </ConfigProvider>
   );

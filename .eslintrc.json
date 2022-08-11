@@ -28,6 +28,7 @@
     "react/jsx-uses-react": 2,//防止React被错误地标记为未使用
     "react/prop-types": 0, //防止在React组件定义中丢失props验证
     "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-explicit-any": 0,// 禁用它可以允许typescript中使用any来声明类型
     "quotes": [2, "single"] //单引号u
   }
 }

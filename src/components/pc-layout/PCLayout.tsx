@@ -1,8 +1,10 @@
-import React, {ReactNode} from 'react';
-import {Layout, Menu} from 'antd';
+import React, {ReactNode, Suspense} from 'react';
+import {Layout, Menu, Spin} from 'antd';
 import './PCLayout.less';
 import {UploadOutlined, UserOutlined, VideoCameraOutlined} from '@ant-design/icons';
 import NvaTab from '../nva-tab/NvaTab';
+import {Outlet} from 'react-router-dom';
+import NvaTabProvider from '../provider/NvaTabProvider';
 
 const {Header, Sider, Content} = Layout;
 
@@ -10,15 +12,11 @@ interface PCLayoutProps {
   children?: ReactNode | undefined;
 }
 
-const PCLayout: React.FC<PCLayoutProps> = (props) => {
-  const {children} = props;
-  /* const [collapsed, setCollapsed] = useState(false);
-   const handleToggle = (collapsed: any) => {
-     setCollapsed(!collapsed)
-   }*/
+const PCLayout: React.FC<PCLayoutProps> = () => {
 
   return (
     <Layout>
+      {/*侧边菜单*/}
       <Sider trigger={null} collapsible style={{}}>
         <div style={{height: '64px', padding: '0 50px', lineHeight: '64px'}}></div>
         <div style={{minHeight: 'calc(100vh - 64px)', overflowY: 'auto'}}>
@@ -51,13 +49,21 @@ const PCLayout: React.FC<PCLayoutProps> = (props) => {
         </div>
       </Sider>
       <Layout>
+        {/*头部*/}
         <Header>
 
         </Header>
+
+        {/*页面*/}
         <Content className={'page-container'}>
-          <NvaTab/>
-          {children}
+          <NvaTabProvider>
+            <NvaTab/>
+            <Suspense fallback={<Spin spinning={true}>{'页面加载中...'}</Spin>}>
+              <Outlet/>
+            </Suspense>
+          </NvaTabProvider>
         </Content>
+
       </Layout>
     </Layout>
   );
