@@ -1,31 +1,31 @@
 import React, {useContext} from 'react';
 import {Dropdown, Menu, Tabs} from 'antd';
 import {NAV_TAB_DASHBOARD, NvaTabContext} from '../provider/NvaTabProvider';
-import './NvaTab.less'
+import './NvaTab.less';
 import {RenderTabBar} from 'rc-tabs/lib/interface';
 import {ItemType} from 'antd/lib/menu/hooks/useItems';
 
 const TabPane = Tabs.TabPane;
 
-const NvaTab: React.FC<Record<string, never>> = () => {
+const NvaTab = () => {
 
-  const {activeKey, removeAll, refresh, remove, removeOthers, changeNvaTab, nvaTabs} = useContext(NvaTabContext)
+  const {activeKey, removeAll, refresh, remove, removeOthers, changeNvaTab, nvaTabs} = useContext(NvaTabContext);
 
   const getMenuItems = (contextKey: string): ItemType[] => {
     return [
       {label: '刷新', key: 'refresh'},
       contextKey == NAV_TAB_DASHBOARD.url ? null : {label: '关闭', key: 'remove'},
       {label: '关闭其他', key: 'removeOthers'},
-      {label: '全部关闭', key: 'removeAll'},
-    ].filter(m => m)
-  }
+      {label: '全部关闭', key: 'removeAll'}
+    ].filter((m) => m);
+  };
 
   const handlerMenuClick = (action: string, contextKey: string) => {
     if (action == 'refresh') refresh?.();
     if (action == 'remove') remove?.(contextKey);
     if (action == 'removeOthers') removeOthers?.(contextKey);
     if (action == 'removeAll') removeAll?.();
-  }
+  };
 
   const renderTabBar: RenderTabBar = (tabNavBarProps, TabNavList) => {
     // https://github.com/react-component/tabs/blob/master/src/TabNavList/TabNode.tsx
@@ -36,11 +36,12 @@ const NvaTab: React.FC<Record<string, never>> = () => {
           (node) => {
             return (
               <Dropdown
-                destroyPopupOnHide={true}
-                overlay={<Menu items={getMenuItems(`${node.key}`)}
-                               onClick={({key}) => handlerMenuClick(key, `${node.key}`)}/>}
-                placement="bottomLeft"
-                trigger={['contextMenu']}
+                  destroyPopupOnHide
+                  overlay={<Menu items={getMenuItems(`${node.key}`)}
+                      onClick={({key}) => handlerMenuClick(key, `${node.key}`)}
+                           />}
+                  placement="bottomLeft"
+                  trigger={['contextMenu']}
               >
                 {node}
               </Dropdown>
@@ -48,36 +49,36 @@ const NvaTab: React.FC<Record<string, never>> = () => {
           }
         }
       </TabNavList>
-    )
-  }
+    );
+  };
 
   return (
     <Tabs
-      activeKey={activeKey}
-      animated={false}
-      className="nva-tab"
-      hideAdd
-      onChange={changeNvaTab}
-      onEdit={(targetKey, action) => {
+        activeKey={activeKey}
+        animated={false}
+        className="nva-tab"
+        hideAdd
+        onChange={changeNvaTab}
+        onEdit={(targetKey, action) => {
         if (action === 'remove' && typeof targetKey == 'string') {
-          remove?.(targetKey)
+          remove?.(targetKey);
         }
       }}
-      renderTabBar={renderTabBar}
-      type="editable-card"
+        renderTabBar={renderTabBar}
+        type="editable-card"
     >
       {
         nvaTabs?.map((tab) => (
           <TabPane
-            closable={tab.url != NAV_TAB_DASHBOARD.url}
-            key={tab.url}
-            tab={tab.title}
+              closable={tab.url != NAV_TAB_DASHBOARD.url}
+              key={tab.url}
+              tab={tab.title}
           />
         ))
       }
     </Tabs>
   );
-}
+};
 
 export default NvaTab;
 

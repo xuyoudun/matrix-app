@@ -332,12 +332,12 @@ module.exports = function (webpackEnv) {
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         // 文件路径别名
-        '@utils': path.resolve(__dirname, '../src/utils'),
-        '@views': path.resolve(__dirname, '../src/views'),
-        '@components': path.resolve(__dirname, '../src/components'),
-        '@hooks': path.resolve(__dirname, '../src/hooks'),
-        '@images': path.resolve(__dirname, '../public/images'),
-        '@styles': path.resolve(__dirname, '../public/styles'),
+        '@/utils': path.resolve(__dirname, '../src/utils'),
+        '@/views': path.resolve(__dirname, '../src/views'),
+        '@/components': path.resolve(__dirname, '../src/components'),
+        '@/hooks': path.resolve(__dirname, '../src/hooks'),
+        '@/images': path.resolve(__dirname, '../public/images'),
+        '@/styles': path.resolve(__dirname, '../public/styles'),
         ...(modules.webpackAliases || {}),
       },
       plugins: [

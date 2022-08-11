@@ -16,19 +16,24 @@ const TestFight: React.FC<AlertProps> = ({message, type = 'success'}) => {
   return (
     <>
       <div style={{width: '80%', margin: '100px auto'}}>
-        <DatePicker onChange={handleChange} value={date}/>
-        <Alert style={{marginTop: 12}} description={date ? date.format('YYYY年MM月DD日') : '未选择'} message="当前日期"/>
+        <DatePicker onChange={handleChange}
+            value={date}
+        />
+        <Alert description={date ? date.format('YYYY年MM月DD日') : '未选择'}
+            message="当前日期"
+            style={{marginTop: 12}}
+        />
         <Alert
-          style={{marginTop: 12}}
-          message={message}
-          description="我们认为，React 是用 JavaScript 构建快速响应的大型 Web 应用程序的首选方式。它在 Facebook 和 Instagram 上表现优秀。"
-          type={type}
-          showIcon
+            description="我们认为，React 是用 JavaScript 构建快速响应的大型 Web 应用程序的首选方式。它在 Facebook 和 Instagram 上表现优秀。"
+            message={message}
+            showIcon
+            style={{marginTop: 12}}
+            type={type}
         />
         <Table/>
       </div>
     </>
   );
-}
+};
 
 export default TestFight;

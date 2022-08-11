@@ -8,19 +8,24 @@ import 'antd/dist/antd.less';
 import {BrowserRouter} from 'react-router-dom';
 
 import './App.css';
-import AppRoutes from './route/routes';
+import {AppRoutes, AuthProvider} from '@/components';
 
 moment.locale('zh-cn');
 
 const App = () => {
 
   return (
-    <ConfigProvider componentSize="small" locale={zhCN}>
+    <ConfigProvider
+        componentSize="small"
+        locale={zhCN}
+    >
       <BrowserRouter>
-        <AppRoutes/>
+        <AuthProvider>
+          <AppRoutes/>
+        </AuthProvider>
       </BrowserRouter>
     </ConfigProvider>
   );
-}
+};
 
 export default App;

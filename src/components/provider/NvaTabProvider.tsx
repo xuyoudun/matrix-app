@@ -7,7 +7,7 @@ export interface NvaTab {
   search?: string | null;
 }
 
-interface NvaTabProps {
+export interface NvaTabProviderProps {
   autoOpen?: boolean;
   children?: ReactNode | undefined;
 }
@@ -31,7 +31,7 @@ export const STORAGE_NAV_TAB_ACTIVE = 'NAV_TAB_ACTIVE';
 export const NAV_TAB_DASHBOARD: NvaTab = {
   url: '/dashboard',
   title: '首页',
-  search: '?tname=首页',
+  search: '?tname=首页'
 };
 
 //规范化pathname
@@ -39,14 +39,14 @@ const normalizePathname = (pathname: string): string => {
   return pathname.replace(/\/+$/, '')
     .replace(/^\/*/, '/')
     .replace(/\/\/+/g, '/');
-}
+};
 
 const normalizeSearch = (search: string | null): string => {
-  search = !search ? '' : search.replace(/^\?*/, '?')
-  return search === '?' ? '' : search
-}
+  search = !search ? '' : search.replace(/^\?*/, '?');
+  return search === '?' ? '' : search;
+};
 
-const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
+const NvaTabProvider: React.FC<NvaTabProviderProps> = ({children, autoOpen = true}) => {
 
   const location = useLocation();
   const pathname = normalizePathname(location.pathname);
@@ -56,7 +56,7 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
 
   const [nvaTabs, setNvaTabs] = useState<NvaTab[]>(() => {
     const storage = sessionStorage.getItem(STORAGE_NAV_TABS);
-    return storage ? JSON.parse(storage) : [NAV_TAB_DASHBOARD]
+    return storage ? JSON.parse(storage) : [NAV_TAB_DASHBOARD];
   });
   const nvaTabsRef = useRef(nvaTabs);
 
@@ -64,13 +64,13 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
     sessionStorage.setItem(STORAGE_NAV_TABS, JSON.stringify(nvaTabs));
     nvaTabsRef.current = nvaTabs;
     setNvaTabs(nvaTabs);
-  }
+  };
 
   const changeNvaTab = (key: string) => {
     const nvaTab = nvaTabsRef.current.find((tab) => tab.url == key);
     if (!nvaTab) return;
     navigate(key + (nvaTab.search || ''));
-  }
+  };
 
   const remove = (key = pathname) => {
     // dropByCacheKey(key);
@@ -83,7 +83,7 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
       const last = nvaTabsNext[index - 1];
       navigate(last.url + (last.search || ''));
     }
-  }
+  };
 
   const removeOthers = (key: string) => {
     // getCachingKeys().filter((r) => r != ROUTER_TAB_DASHBOARD.url && r != name).forEach((r) => dropByCacheKey(r));
@@ -92,21 +92,21 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
     const nvaTabsNext = (key == NAV_TAB_DASHBOARD.url) ? [NAV_TAB_DASHBOARD] : [NAV_TAB_DASHBOARD, nvaTab];
     setNvaTabsWithStorage(nvaTabsNext);
     navigate(nvaTab.url + (nvaTab.search || ''));
-  }
+  };
 
   const removeAll = () => {
     // getCachingKeys().filter((r) => r != ROUTER_TAB_DASHBOARD.url).forEach((r) => dropByCacheKey(r));
     setNvaTabsWithStorage([NAV_TAB_DASHBOARD]);
     navigate(NAV_TAB_DASHBOARD.url + NAV_TAB_DASHBOARD.search);
-  }
+  };
 
   const refresh = () => {
     // TODO
     navigate(pathname + search, {replace: true});
-  }
+  };
 
   const openNewNvaTab = ({url, title, search = null}: NvaTab) => {
-    url = normalizePathname(url)
+    url = normalizePathname(url);
     if (url === '/') return;
 
     const nvaTab = nvaTabsRef.current.find((o) => o.url == url);
@@ -114,11 +114,11 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
 
     //确保search中包含tname=xxxx标签名称
     title = title || 'No Title';
-    search = normalizeSearch(search)
-    search = !search ? `?tname=${title}` : (search.match(/tname=[^&]*/) ? search : `${search}&tname=${title}`)
+    search = normalizeSearch(search);
+    search = !search ? `?tname=${title}` : (search.match(/tname=[^&]*/) ? search : `${search}&tname=${title}`);
 
     if (nvaTab == undefined) {
-      const start = parseInt(sessionStorage.getItem(STORAGE_NAV_TAB_ACTIVE) || '0') //总是从当前激活的右侧打开新页签
+      const start = parseInt(sessionStorage.getItem(STORAGE_NAV_TAB_ACTIVE) || '0'); //总是从当前激活的右侧打开新页签
       nvaTabsNext.splice(start + 1, 0, {url, title, search});
       setNvaTabsWithStorage(nvaTabsNext);
     } else if (nvaTab.search != search) {
@@ -131,13 +131,13 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
       navigate(url + search, {replace: !!(nvaTab?.search != search)});
     }
 
-    sessionStorage.setItem(STORAGE_NAV_TAB_ACTIVE, `${nvaTabsNext.findIndex((o) => o.url == url)}`)
-  }
+    sessionStorage.setItem(STORAGE_NAV_TAB_ACTIVE, `${nvaTabsNext.findIndex((o) => o.url == url)}`);
+  };
 
   useEffect(() => {
     if (autoOpen) {
-      const nvaTab: NvaTab = {url: pathname, title: params.get('tname'), search}
-      openNewNvaTab(nvaTab)
+      const nvaTab: NvaTab = {url: pathname, title: params.get('tname'), search};
+      openNewNvaTab(nvaTab);
     }
   }, [pathname, search]);
 
@@ -147,11 +147,12 @@ const NvaTabProvider: React.FC<NvaTabProps> = ({children, autoOpen = true}) => {
 
   return (
     <NvaTabContext.Provider
-      value={{nvaTabs, activeKey: pathname, openNewNvaTab, changeNvaTab, remove, removeOthers, removeAll, refresh}}>
+        value={{nvaTabs, activeKey: pathname, openNewNvaTab, changeNvaTab, remove, removeOthers, removeAll, refresh}}
+    >
       {children}
     </NvaTabContext.Provider>
   );
-}
+};
 
 
 export default NvaTabProvider;
