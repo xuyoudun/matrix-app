@@ -9,7 +9,7 @@ export type {IamRole, AuthContextProps, AuthProviderProps, OAuth} from './provid
 /*导航标签页*/
 export {default as NvaTab} from './nva-tab/NvaTab';
 export {default as NvaTabProvider} from './provider/NvaTabProvider';
-export {NvaTabContext} from './provider/NvaTabProvider';
+export {NvaTabContext, NAV_TAB_DASHBOARD} from './provider/NvaTabProvider';
 export type {NvaTab as NvaTabType, NvaTabProviderProps, NvaTabContextProps} from './provider/NvaTabProvider';
 /*测试相关组件*/
 export {default as TestFight} from './test-fight/TestFight';

@@ -28,6 +28,7 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": ["error"],
     "@typescript-eslint/no-explicit-any": 0, // 禁用它可以允许typescript中使用any来声明类型
+    "@typescript-eslint/ban-types": 0,
 
     "quotes": [2, "single"], //单引号u
     "no-console": 2, //不禁用console

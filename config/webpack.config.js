@@ -186,7 +186,7 @@ module.exports = function (webpackEnv) {
               lessOptions: {
                 javascriptEnabled: true,
                 modifyVars: {
-                  'primary-color': '#f5991e', // antd主题样式
+                  'primary-color': '#b05b24', // antd主题样式
                   'disabled-bg': '#F5F5F5',
                   'disabled-color': '#101210'
                 },

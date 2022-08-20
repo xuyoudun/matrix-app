@@ -9,10 +9,9 @@
  */
 import {ComponentType, lazy} from 'react';
 import {Navigate} from 'react-router-dom';
-import PCLayout from '../components/pc-layout/PCLayout';
-import Login from '../views/login/Login';
-import {NAV_TAB_DASHBOARD} from '../components/provider/NvaTabProvider';
+import {/*PCLayout, */NAV_TAB_DASHBOARD} from '@/components';
 import Dashboard from '../views/dashboard/Dashboard';
+import Login from '../views/login/Login';
 
 export interface RouteConfig {
   caseSensitive?: boolean;
@@ -24,14 +23,14 @@ export interface RouteConfig {
   mete?: { title?: string, cache?: boolean };
 }
 
-export const constantRoutes: RouteConfig[] = [
+const constantRoutes: RouteConfig[] = [
   {
     path: '/login',
     component: Login
   },
   {
     path: '/',
-    component: PCLayout,
+    //component: PCLayout,
     children: [
       {
         path: '/',
@@ -65,3 +64,5 @@ export const constantRoutes: RouteConfig[] = [
     ]
   }
 ];
+
+export default constantRoutes;
