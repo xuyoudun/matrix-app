@@ -43,7 +43,7 @@ export interface AuthContextProps {
   setAppOAuth?: (oauth: OAuth) => void;
 }
 
-export const AuthContext: Context<AuthContextProps> = React.createContext({});
+export const  AuthContext: Context<AuthContextProps> = React.createContext({});
 
 const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
 

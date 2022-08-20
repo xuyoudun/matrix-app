@@ -1,7 +1,7 @@
 import {RouteObject} from 'react-router/lib/router';
 import React from 'react';
 import {useRoutes} from 'react-router-dom';
-import constantRoutes, {RouteConfig} from '../../route/routes';
+import constantRoutes, {RouteConfig} from '../routes';
 
 const createRoutes = (routes: RouteConfig[]): RouteObject[] => {
   return routes.map((route) => {

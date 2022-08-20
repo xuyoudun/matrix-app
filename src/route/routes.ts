@@ -9,7 +9,7 @@
  */
 import {ComponentType, lazy} from 'react';
 import {Navigate} from 'react-router-dom';
-import {/*PCLayout, */NAV_TAB_DASHBOARD} from '@/components';
+import {PCLayout, NAV_TAB_DASHBOARD} from '@/components';
 import Dashboard from '../views/dashboard/Dashboard';
 import Login from '../views/login/Login';
 
@@ -30,7 +30,7 @@ const constantRoutes: RouteConfig[] = [
   },
   {
     path: '/',
-    //component: PCLayout,
+    component: PCLayout,
     children: [
       {
         path: '/',

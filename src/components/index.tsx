@@ -1,5 +1,3 @@
-/*全局路由*/
-export {default as AppRoutes} from './app-route/AppRoutes';
 /*布局*/
 export {default as PCLayout} from './pc-layout/PCLayout';
 /*认证*/
