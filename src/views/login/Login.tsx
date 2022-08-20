@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import {Button, Checkbox, Divider, Form, Input} from 'antd';
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import './Login.less';
-import {AuthContext} from '@/components';
+import {AuthContext} from 'matrix';
 
 const Login = () => {
 

@@ -8,7 +8,7 @@ import 'antd/dist/antd.less';
 import {BrowserRouter} from 'react-router-dom';
 
 import './App.css';
-import { AuthProvider} from '@/components';
+import { AuthProvider} from 'matrix';
 import AppRoutes from './route/app-route/AppRoutes';
 
 moment.locale('zh-cn');

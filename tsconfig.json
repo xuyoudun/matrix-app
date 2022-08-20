@@ -20,13 +20,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/components": ["src/components"],
-      "@/utils/*": ["src/utils/*"],
-      "@/views/*": ["src/views/*"],
-      "@/components/*": ["src/components/*"],
-      "@/hooks/*": ["src/hooks/*"],
-      "@/images/*": ["public/images/*"],
-      "@/styles/*": ["public/styles/*"],
+      "matrix": ["src/components/index"],
+      "matrix-api": ["src/api/index"],
+      "matrix-hook": ["src/hooks/index"],
+      "matrix-util": ["src/utils/index"],
+//      "@/images/*": ["public/images/*"],
+//      "@/styles/*": ["public/styles/*"],
     }
   },
   "include": [

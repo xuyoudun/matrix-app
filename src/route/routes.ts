@@ -9,7 +9,7 @@
  */
 import {ComponentType, lazy} from 'react';
 import {Navigate} from 'react-router-dom';
-import {PCLayout, NAV_TAB_DASHBOARD} from '@/components';
+import {NAV_TAB_DASHBOARD, PCLayout} from 'matrix';
 import Dashboard from '../views/dashboard/Dashboard';
 import Login from '../views/login/Login';
 
@@ -43,23 +43,27 @@ const constantRoutes: RouteConfig[] = [
       },
       {
         path: '/666',
-        component: lazy(() => import('@/components/test-fight/TestFight'))
+        component: lazy(() => import('../views/test-fight/TestFight')),
+        props: {type: 'warning'}
       },
       {
         path: '/777',
-        component: lazy(() => import('@/components/test-fight/TestFight'))
+        component: lazy(() => import('../views/test-fight/TestFight')),
+        props: {type: 'info'}
       },
       {
         path: '/888',
-        component: lazy(() => import('@/components/test-fight/TestFight'))
+        component: lazy(() => import('../views/test-fight/TestFight')),
+        props: {type: 'error'}
       },
       {
         path: '/999',
-        component: lazy(() => import('@/components/test-fight/TestFight'))
+        component: lazy(() => import('../views/test-fight/TestFight')),
+        props: {type: 'success'}
       },
       {
         path: '/555',
-        component: lazy(() => import('@/components/test-fight/TestFight2'))
+        component: lazy(() => import('../views/test-fight/TestFight2'))
       }
     ]
   }
