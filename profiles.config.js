@@ -8,7 +8,7 @@
 module.exports = {
 
   dev: {
-    baseURL: 'http://www.matrix-dev.com'
+    baseURL: 'http://localhost:8080'
   },
 
   uat: {

@@ -1,0 +1,200 @@
+@error-color: #ff4d4f;
+
+.matrix-pro-table {
+  .ant-table-thead {
+    & > tr {
+      height: 40px;
+
+      & > th {
+        text-align: center;
+        background: #ebebeb;
+        border: 1px solid #fff;
+      }
+    }
+  }
+
+  .ant-table-tbody {
+    & > tr {
+      height: 40px;
+      background: #fffaf3;
+      border-right: 1px solid #dedede;
+      border-bottom: 1px solid #dedede;
+      border-left: 1px solid #dedede;
+
+      & > td {
+        padding: 0 10px;
+        border: 1px solid #f6f6f6;
+
+        &.left {
+          text-align: left;
+        }
+      }
+
+      &:hover {
+        & > td {
+          background: inherit;
+        }
+      }
+    }
+  }
+
+  .ant-table-thead > tr > th,
+  .ant-table-tbody > tr > td {
+    color: #7b7b7b;
+    font-size: 12px;
+    font-family: 'Microsoft YaHei', '微软雅黑', sans-serif, Helvetica, Arial;
+  }
+
+  .ant-table {
+    .ant-input {
+      border-color: #bbb;
+      font-size: 12px;
+      line-height: 1.8334;
+
+      &:hover {
+        border-color: #ffb647;
+      }
+    }
+
+    .ant-input-disabled:hover {
+      border-color: inherit;
+    }
+  }
+
+  // .temp {
+  //   .td-input {
+  //     .ant-input-number-input {
+  //       text-align: right;
+  //     }
+  //   }
+  // }
+
+  .ant-table-tbody > tr > td.right,
+  .ant-table-tbody > tr > td.right input {
+    text-align: right;
+  }
+
+  /* 行收缩 */
+  .ant-table-row-expand-icon {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    line-height: 14px;
+    text-align: center;
+    vertical-align: middle;
+    background: transparent;
+    border: 7px solid transparent;
+    border-top-color: #ccc;
+    cursor: pointer;
+    user-select: none;
+
+    &.ant-table-row-expand-icon-spaced {
+      border: 0;
+    }
+
+    &::after {
+      content: '';
+    }
+  }
+
+  .ant-table-row-expand-icon-collapsed {
+    left: 4px;
+    transform: rotate(-90deg);
+  }
+
+  .ant-table-row-expand-icon-expanded {
+    top: 4px;
+  }
+
+  .ant-table-row-expand-icon:focus,
+  .ant-table-row-expand-icon:hover {
+    color: inherit;
+    border: 7px solid transparent;
+    border-top-color: #ccc;
+  }
+
+  .table-head-link {
+    color: #3367d6;
+    font-weight: 500;
+    text-decoration: underline;
+
+    &:hover {
+      color: #3f51b5;
+      text-decoration: underline;
+    }
+  }
+
+  .ant-input-number {
+    width: 100%;
+  }
+
+  .ant-input,
+  .ant-input-number {
+    padding: 0 4px;
+    background-color: inherit;
+  }
+
+  .ant-input-number-input {
+    height: auto;
+    padding: 0;
+  }
+
+  .ant-input-disabled,
+  .ant-input-number-disabled {
+    background-color: #f5f5f5;
+  }
+
+  .ant-select {
+    width: 100%;
+    vertical-align: middle;
+  }
+
+  .ant-select-single:not(.ant-select-customize-input):not(.ant-pagination-options-size-changer)
+    .ant-select-selector {
+    height: 26px;
+    background-color: inherit;
+
+    .ant-select-selection-item,
+    .ant-select-selection-search-input,
+    .ant-select-selection-placeholder {
+      height: 24px;
+      line-height: 24px;
+    }
+  }
+
+  .icost-invalid {
+    > .ant-input,
+    > .ant-input-textarea > .ant-input,
+    > .ant-input-number,
+    > .ant-select-selector,
+    > .ant-select > .ant-select-selector {
+      border-color: @error-color !important;
+    }
+
+    > .icost-invalid-message {
+      color: @error-color;
+    }
+  }
+
+  textarea {
+    margin: 10px 0;
+  }
+
+  .ant-table-cell-fix-left,
+  .ant-table-cell-fix-right {
+    background-color: inherit;
+  }
+}
+
+.ant-table-cell[required]::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: #ff4d4f;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: '*';
+}

@@ -57,13 +57,12 @@ const constantRoutes: RouteConfig[] = [
         props: {type: 'error'}
       },
       {
-        path: '/999',
-        component: lazy(() => import('../views/test-fight/TestFight')),
-        props: {type: 'success'}
+        path: '/system/entity/:name/query',
+        component: lazy(() => import('../views/system-config/EntityQuery'))
       },
       {
-        path: '/555',
-        component: lazy(() => import('../views/test-fight/TestFight2'))
+        path: '/system/entity/config/',
+        component: lazy(() => import('../views/system-config/EntityConfig'))
       }
     ]
   }

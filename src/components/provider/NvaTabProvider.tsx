@@ -25,6 +25,10 @@ export type NvaTabContextProps = {
 
 export const NvaTabContext: Context<NvaTabContextProps> = React.createContext({});
 
+export function useNvaTab() {
+  return React.useContext(NvaTabContext);
+}
+
 export const STORAGE_NAV_TABS = 'NAV_TABS';
 export const STORAGE_NAV_TAB_ACTIVE = 'NAV_TAB_ACTIVE';
 
@@ -101,8 +105,10 @@ const NvaTabProvider: React.FC<NvaTabProviderProps> = ({children, autoOpen = tru
   };
 
   const refresh = () => {
+    // eslint-disable-next-line no-alert
+    navigate(0);
     // TODO
-    navigate(pathname + search, {replace: true});
+    //navigate(pathname + search, {replace: true});
   };
 
   const openNewNvaTab = ({url, title, search = null}: NvaTab) => {

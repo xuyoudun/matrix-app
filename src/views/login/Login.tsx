@@ -1,12 +1,12 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Button, Checkbox, Divider, Form, Input} from 'antd';
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
 import './Login.less';
-import {AuthContext} from 'matrix';
+import {useAuth} from 'matrix';
 
 const Login = () => {
 
-  const {setAppOAuth} = useContext(AuthContext);
+  const {setAppOAuth} = useAuth();
   const [form] = Form.useForm();
 
   useEffect(() => {

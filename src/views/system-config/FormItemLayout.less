@@ -1,0 +1,110 @@
+ul,li{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.form-layout{
+  height: auto;
+  zoom: 1;
+  &:after {
+    clear: both;
+  }
+  &:before, &:after {
+    content: '';
+    display: table;
+  }
+  >li{
+    float: left;
+    &.no-label .ant-form-item{
+      padding-left: 0;
+    }
+  }
+  .ant-form-item{
+    padding: 3px 0;
+    position: relative;
+    padding-left: 98px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    .ant-form-item-label{
+      width: 98px;
+      text-align: right;
+      line-height: 16px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      position: absolute;
+      left: 0;
+      top: 0;
+      label{
+        white-space: normal;
+        padding-right: 15px;
+        &:after{
+          position: absolute;
+          top: 50%;
+          right: 9px;
+          transform: translateY(-50%);
+          margin: 0;
+        }
+      }
+    }
+    .ant-form-item-control{
+      line-height: 40px;
+      >.ant-form-item-children > *{
+        width: 100%;
+      }
+      .ant-form-explain, .ant-form-split{
+        position: absolute;
+        left: 0;
+        bottom: -14px;
+        white-space: nowrap;
+      }
+    }
+  }
+  .form-button{
+    text-align: left;
+    padding: 7px 0;
+  }
+}
+// 2019-09-28 表单元素布局升级为2.0 布局
+.js-form-layout{
+  zoom: 1;
+  .ant-form-item{
+    .ant-form-item-label{
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      white-space: normal;
+      min-height: 40px;
+    }
+    .ant-form-item-control{
+      line-height: 40px;
+      >.ant-form-item-children > *{
+        width: 100%;
+      }
+      .ant-form-explain, .ant-form-split{
+        position: absolute;
+        left: 0;
+        bottom: -14px;
+        white-space: nowrap;
+      }
+    }
+  }
+  .form-button{
+    text-align: left;
+    padding: 0;
+  }
+  .form-button-r{
+    text-align: right;
+  }
+}
+
+@media (max-width: 991px) {
+  .js-form-layout .ant-form-item .ant-form-item-label{
+    justify-content: flex-start;
+  }
+  .js-form-layout-fixed .ant-form-item .ant-form-item-label{
+    justify-content: flex-end;
+  }
+}

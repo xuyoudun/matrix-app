@@ -1,6 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Dropdown, Menu, Tabs} from 'antd';
-import {NAV_TAB_DASHBOARD, NvaTabContext} from '../provider/NvaTabProvider';
+import {NAV_TAB_DASHBOARD, useNvaTab} from '../provider/NvaTabProvider';
 import './NvaTab.less';
 import {RenderTabBar} from 'rc-tabs/lib/interface';
 import {ItemType} from 'antd/lib/menu/hooks/useItems';
@@ -9,7 +9,7 @@ const TabPane = Tabs.TabPane;
 
 const NvaTab = () => {
 
-  const {activeKey, removeAll, refresh, remove, removeOthers, changeNvaTab, nvaTabs} = useContext(NvaTabContext);
+  const {activeKey, removeAll, refresh, remove, removeOthers, changeNvaTab, nvaTabs} = useNvaTab();
 
   const getMenuItems = (contextKey: string): ItemType[] => {
     return [

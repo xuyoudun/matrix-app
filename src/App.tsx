@@ -8,18 +8,15 @@ import 'antd/dist/antd.less';
 import {BrowserRouter} from 'react-router-dom';
 
 import './App.css';
-import { AuthProvider} from 'matrix';
-import AppRoutes from './route/app-route/AppRoutes';
+import {AuthProvider} from 'matrix';
+import AppRoutes from './route/AppRoutes';
 
 moment.locale('zh-cn');
 
 const App = () => {
 
   return (
-    <ConfigProvider
-        componentSize="small"
-        locale={zhCN}
-    >
+    <ConfigProvider componentSize="small" locale={zhCN}>
       <BrowserRouter>
         <AuthProvider>
           <AppRoutes/>
