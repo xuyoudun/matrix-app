@@ -1,6 +1,6 @@
 import {Button, Checkbox, Form, Input, InputNumber, Select} from 'antd';
 import React, {useEffect, useState} from 'react';
-import {ConfigData, getConfigView, ConfigView} from '../../api/entity-expose';
+import {ConfigData, ConfigView, getConfigData, getConfigView} from '../../api/entity-expose';
 import EditableTable from '../../components/table';
 import {FieldData} from 'rc-field-form/lib/interface';
 
@@ -12,7 +12,7 @@ const EntityQuery: React.FC<any> = () => {
     columns: []
   });
 
-  const [configData/*, setConfigData*/] = useState<ConfigData>({
+  const [configData, setConfigData] = useState<ConfigData>({
     initialValue: {},
     dataSource: []
   });
@@ -43,14 +43,17 @@ const EntityQuery: React.FC<any> = () => {
   }, []);
 
   const handleChangeEntity = (value: string) => {
-    if (value == 'entity_name') {
-      value;
-    }
+    if (value == 'entity_name') return;
+
+    getConfigData(value).then((res) => {
+      const {initialValue, dataSource} = res;
+      setConfigData({initialValue, dataSource});
+    });
   };
 
   const onFieldsChange = (changedFields: FieldData[], allFields: FieldData[]) => {
     // eslint-disable-next-line no-console
-     console.log(changedFields, allFields);
+    console.log(changedFields, allFields);
   };
 
   return (
@@ -60,11 +63,13 @@ const EntityQuery: React.FC<any> = () => {
           view.formItems.map((item) => {
             let inputType = <Input/>;
             if (item.valueType == 'Select') {
-              inputType = <Select options={item.options} style={{width: '200px'}}
-                  onChange={handleChangeEntity}/>;
+              inputType = (
+                <Select options={item.options} style={{width: '200px'}}
+                    onChange={handleChangeEntity}/>
+              );
             } else if (item.valueType == 'InputNumber') {
               inputType = <InputNumber/>;
-            }else if (item.valueType == 'Checkbox') {
+            } else if (item.valueType == 'Checkbox') {
               inputType = <Checkbox/>;
             }
 
